@@ -16,4 +16,10 @@ public class Student {
 		return this.grade;
 	}
 	
+	public String toString() {
+		
+		return "name: " + this.name+ "\n"
+				+ "grade: " + this.grade+ "\n";
+	}
+	
 }
