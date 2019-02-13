@@ -11,7 +11,7 @@ public class Sorter {
 	
 	public static void main(String args[]) {
 		// instantiate a file reader object
-		FileReader fr = new FileReader();
+		FileRead fr = new FileRead();
 		//Instantiate a file writer object
 		FileWrite fw = new FileWrite();
 		

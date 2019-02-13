@@ -11,8 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class FileReader {
-	public FileReader () {}
+public class FileRead {
+	public FileRead () {}
 	
 	//Read JSON file and Convert the JSON to student objects
 	public ArrayList<Student> parseJSON(File f) throws IOException {
