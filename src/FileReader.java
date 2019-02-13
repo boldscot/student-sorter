@@ -20,14 +20,14 @@ public class FileReader {
 		String studentsJSONData = FileUtils.readFileToString(f, "utf-8"); 
 		
 		// Convert string to json array
-	    JSONArray studentsJSONArrayList= new JSONArray(studentsJSONData);
+	    JSONArray studentsJSONArray= new JSONArray(studentsJSONData);
 	    
-	    // Declare arraylist of student objects, size == to the size of json array
+	    // Declare arraylist of student objects
 	    ArrayList<Student> studentObjects = new ArrayList<Student>();
 	    
 	    // Iterate over json array and create a student object for each index
-	    for (int i = 0; i < studentsJSONArrayList.length(); i++) {
-			JSONObject jo = studentsJSONArrayList.getJSONObject(i);
+	    for (int i = 0; i < studentsJSONArray.length(); i++) {
+			JSONObject jo = studentsJSONArray.getJSONObject(i);
 			studentObjects.add(new Student(jo.getString("name"), jo.getFloat("grade")));
 	    }
 	    
@@ -40,6 +40,7 @@ public class FileReader {
 		Reader r = Files.newBufferedReader(Paths.get(url));
 		
 		// pass the reader to the CSVParser
+		@SuppressWarnings("resource")
 		CSVParser csvp = new CSVParser(r, CSVFormat.DEFAULT
 				.withFirstRecordAsHeader()
                 .withTrim());

@@ -21,11 +21,13 @@ public class Student implements Comparator<Student>, Comparable<Student>{
 	}
 	
 	//compare by name
+	@Override
 	public int compareTo(Student s) {
 		return (this.getName()).compareTo(s.getName());
 	}
 	
 	//compare by grade
+	@Override
 	public int compare(Student s1, Student s2) {
 		// cast result to int
 		return Math.round(s2.getGrade()-s1.getGrade());
