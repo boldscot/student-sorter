@@ -18,38 +18,23 @@ public class Sorter {
 		try {
 			studentJSONObjects = fr.parseJSON(JSON_FILE);
 			studentCSVObjects = fr.parseCSV(CSV_FILE);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Collections.sort(studentJSONObjects);
-		try {
+			
+			Collections.sort(studentJSONObjects);
 			fw.writeToJSONFile("student_name", studentJSONObjects);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Collections.sort(studentJSONObjects, new Student());
-		try {
+			
+			Collections.sort(studentJSONObjects, new Student());
 			fw.writeToJSONFile("student_grade", studentJSONObjects);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Collections.sort(studentCSVObjects);
-		try {
+			
+			Collections.sort(studentCSVObjects);
 			fw.writeToCSVFile("student_name", studentCSVObjects);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Collections.sort(studentCSVObjects, new Student());
-		try {
+			
+			Collections.sort(studentCSVObjects, new Student());
 			fw.writeToCSVFile("student_grade", studentCSVObjects);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
 		
+	}
 
 }

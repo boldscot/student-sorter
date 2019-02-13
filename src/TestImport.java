@@ -1,4 +1,6 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +24,11 @@ class TestImport {
 		studentTestObjects.add(STUDENT_A);
 		studentTestObjects.add(STUDENT_B);
 		studentTestObjects.add(STUDENT_C);
+		
+		// Testing the equals overriding in student
+		assertNotEquals(STUDENT_A, STUDENT_B);
+		// will fail, objects not the same
+		//assertEquals(STUDENT_A, STUDENT_C);
 		
 		studentTestFileData = fr.parseJSON(JSON_FILE);
 		
