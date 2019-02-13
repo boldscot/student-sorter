@@ -53,6 +53,8 @@ public class FileReader {
 			studentObjects.add(new Student(rec.get("name"), Float.parseFloat(rec.get("grade"))));
 		}
 		
+		r.close();
+		
 		return studentObjects;
 	}
 	

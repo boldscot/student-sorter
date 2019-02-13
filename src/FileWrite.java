@@ -23,6 +23,7 @@ public class FileWrite {
 			
 			JSONArray jsaArray = new JSONArray();
 			
+			// Create a json object from each student and add to json array
 			for (Student student : s) {
 				JSONObject jsonObj = new JSONObject();
 				
@@ -32,7 +33,9 @@ public class FileWrite {
 				jsaArray.put(jsonObj);
 			}
 			
+			// write json array to file, flush the stream buffer and close the file writer
 			fw.write(jsaArray.toString());
+			fw.flush();
 			fw.close();
 	}
 	
@@ -40,10 +43,13 @@ public class FileWrite {
 		String filePath = "./data/"+fileName+".csv";
 		
 		File f =  new File(filePath);
+		//check if file exists, delete it if it does
 		if(f.exists()) f.delete();
 		
+		// create a new buffered writer and pass the file path to it
 		BufferedWriter bw = Files.newBufferedWriter(Paths.get(filePath));
 		
+		// Write to file using csv printer class
 		@SuppressWarnings("resource")
 		CSVPrinter printer = new CSVPrinter(bw, CSVFormat.DEFAULT
 				.withHeader("name", "grade"));
@@ -52,6 +58,8 @@ public class FileWrite {
 			printer.printRecord(student.getName(), student.getGrade());
 		}
 		
+		// flush out the stream buffer and close the writer
 		printer.flush();
+		bw.close();
 	}
 }
