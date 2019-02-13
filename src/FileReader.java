@@ -35,7 +35,7 @@ public class FileReader {
 	}
 	
 	// Read csv file and convert to Student objects
-	public ArrayList<Student> parseCSVStudents(String url) throws IOException {
+	public ArrayList<Student> parseCSV(String url) throws IOException {
 		// Create a buffered reader for the file 
 		Reader r = Files.newBufferedReader(Paths.get(url));
 		
