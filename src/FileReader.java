@@ -1,44 +1,58 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class FileReader {
-	private static String studentsJSONData;
-	private static File file;
+	public FileReader () {}
 	
-	public FileReader () throws IOException {
-		file = new File("./data/students.json");
-		studentsJSONData = FileUtils.readFileToString(file, "utf-8"); 
-	}
-	
-	
-	//Convert the JSON to student objects
-	private static Student[] convertJSON() {
+	//Read JSON file and Convert the JSON to student objects
+	public Student[] parseJSON(File f) throws IOException {
+		// Parse file contents to a string
+		String studentsJSONData = FileUtils.readFileToString(f, "utf-8"); 
 		
-		// Convert JSON string to JSONObject
-	    JSONArray studentsJsonObject = new JSONArray(studentsJSONData);
+		// Convert string to json array
+	    JSONArray studentsJSONArray= new JSONArray(studentsJSONData);
 	    
-	    Student[] studentObjects = new Student[studentsJsonObject.length()];
+	    // Declare array of student objects, size == to the size of json array
+	    Student[] studentObjects = new Student[studentsJSONArray.length()];
 	    
-	    for (int i = 0; i < studentsJsonObject.length(); i++) {
-			JSONObject jsonStudent = studentsJsonObject.getJSONObject(i);
-			studentObjects[i] = new Student(jsonStudent.getString("name"), jsonStudent.getFloat("grade"));
+	    // Iterate over json array and create a student object for each index
+	    for (int i = 0; i < studentsJSONArray.length(); i++) {
+			JSONObject jo = studentsJSONArray.getJSONObject(i);
+			studentObjects[i] = new Student(jo.getString("name"), jo.getFloat("grade"));
 	    }
 	    
 		return studentObjects;
 	}
 	
-	
-	public static void main(String[] args) throws IOException {
-		FileReader fr = new FileReader();
-		Student [] students = convertJSON();
+	// Read csv file and convert to Student objects
+	public ArrayList<Student> parseCSVStudents(String url) throws IOException {
+		// Create a buffered reader for the file 
+		Reader r = Files.newBufferedReader(Paths.get(url));
 		
-		for (int i = 0; i < students.length; i++) {
-			System.out.println(students[i].toString());
+		// pass the reader to the CSVParser
+		CSVParser csvp = new CSVParser(r, CSVFormat.DEFAULT
+				.withFirstRecordAsHeader()
+                .withTrim());
+		
+		// Arraylist to store student objects
+		ArrayList<Student> studentObjects = new ArrayList<Student>();
+		
+		// Create a student object for each record in the parser
+		for (CSVRecord rec : csvp) {
+			studentObjects.add(new Student(rec.get("name"), Float.parseFloat(rec.get("grade"))));
 		}
-
+		
+		return studentObjects;
 	}
 	
 }
