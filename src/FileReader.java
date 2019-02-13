@@ -15,20 +15,20 @@ public class FileReader {
 	public FileReader () {}
 	
 	//Read JSON file and Convert the JSON to student objects
-	public Student[] parseJSON(File f) throws IOException {
+	public ArrayList<Student> parseJSON(File f) throws IOException {
 		// Parse file contents to a string
 		String studentsJSONData = FileUtils.readFileToString(f, "utf-8"); 
 		
 		// Convert string to json array
-	    JSONArray studentsJSONArray= new JSONArray(studentsJSONData);
+	    JSONArray studentsJSONArrayList= new JSONArray(studentsJSONData);
 	    
-	    // Declare array of student objects, size == to the size of json array
-	    Student[] studentObjects = new Student[studentsJSONArray.length()];
+	    // Declare arraylist of student objects, size == to the size of json array
+	    ArrayList<Student> studentObjects = new ArrayList<Student>();
 	    
 	    // Iterate over json array and create a student object for each index
-	    for (int i = 0; i < studentsJSONArray.length(); i++) {
-			JSONObject jo = studentsJSONArray.getJSONObject(i);
-			studentObjects[i] = new Student(jo.getString("name"), jo.getFloat("grade"));
+	    for (int i = 0; i < studentsJSONArrayList.length(); i++) {
+			JSONObject jo = studentsJSONArrayList.getJSONObject(i);
+			studentObjects.add(new Student(jo.getString("name"), jo.getFloat("grade")));
 	    }
 	    
 		return studentObjects;

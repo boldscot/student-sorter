@@ -10,6 +10,8 @@ public class Student implements Comparator<Student>, Comparable<Student>{
 		this.grade = grade;
 	}
 	
+	public Student() {}
+	
 	public String getName () {
 		return this.name;
 	}
@@ -26,7 +28,7 @@ public class Student implements Comparator<Student>, Comparable<Student>{
 	//compare by grade
 	public int compare(Student s1, Student s2) {
 		// cast result to int
-		return Math.round(s1.getGrade()-s2.getGrade());
+		return Math.round(s2.getGrade()-s1.getGrade());
 	}
 	
 	// Return string representation of the object

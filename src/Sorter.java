@@ -1,11 +1,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sorter {
 	private final static File JSON_FILE = new File("./data/students.json");;
 	private final static String CSV_FILE = "./data/students.csv";
-	private static Student[] studentJSONObjects;
+	private static ArrayList<Student> studentJSONObjects;
 	private static ArrayList<Student> studentCSVObjects;
 	
 	public static void main(String args[]) {
@@ -19,14 +20,25 @@ public class Sorter {
 			e.printStackTrace();
 		}
 		
-		for (int i = 0; i < studentJSONObjects.length; i++) {
-			System.out.println(studentJSONObjects[i].toString());
+		Collections.sort(studentJSONObjects);
+		for (Student s : studentJSONObjects) {
+			System.out.println(s.toString());
 		}
 		
+		Collections.sort(studentJSONObjects, new Student());
+		for (Student s : studentJSONObjects) {
+			System.out.println(s.toString());
+		}
+		
+		Collections.sort(studentCSVObjects);
 		for (Student s : studentCSVObjects) {
 			System.out.println(s.toString());
 		}
 		
+		Collections.sort(studentCSVObjects, new Student());
+		for (Student s : studentCSVObjects) {
+			System.out.println(s.toString());
+		}
 	}
 
 }
