@@ -35,13 +35,13 @@ public class Sorter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		Collections.sort(studentCSVObjects);
 		try {
 			fw.writeToCSVFile("student_name", studentCSVObjects);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		Collections.sort(studentCSVObjects, new Student());
 		try {
