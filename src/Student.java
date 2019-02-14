@@ -45,6 +45,7 @@ public class Student implements Comparator<Student>, Comparable<Student> {
 	public boolean equals(final Object obj) {
 		if (obj instanceof Student) {
 			final Student other = (Student) obj;
+			
 			return Objects.equal(name, other.name)
 					&& Objects.equal(grade, other.grade);
 		} else {

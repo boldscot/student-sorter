@@ -1,10 +1,8 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 class TestImport {
@@ -25,10 +23,13 @@ class TestImport {
 		studentTestObjects.add(STUDENT_B);
 		studentTestObjects.add(STUDENT_C);
 		
-		// Testing the equals overriding in student
+		// Testing the equals() overriding in student
 		assertNotEquals(STUDENT_A, STUDENT_B);
-		// will fail, objects not the same
-		//assertEquals(STUDENT_A, STUDENT_C);
+		assertEquals(STUDENT_C, STUDENT_C);
+		assertEquals(STUDENT_A, STUDENT_A);
+		assertNotEquals(STUDENT_A, new Object());
+		assertEquals(STUDENT_A.hashCode(), STUDENT_A.hashCode());
+		assertNotEquals(STUDENT_A.hashCode(), STUDENT_B.hashCode());;
 		
 		studentTestFileData = fr.parseJSON(JSON_FILE);
 		
